@@ -13,9 +13,9 @@ pkg install -y indexinfo
 
 rcsetup() {
 
-	RCFILE=/etc/rc.conf
+    RCFILE=/etc/rc.conf
 
-	cat <<RCCONF >> "$RCFILE"
+    cat <<RCCONF >> "$RCFILE"
 # START disable sendmail
 # https://gist.github.com/igalic/c77ed494e102977c9fd06ce9b053cda0
 # since sendmail_enable="NONE" is deprecated (since 2004, lol), this is how to disable all of Sendmail:
@@ -34,11 +34,11 @@ RCCONF
 
 mailersetup() {
 
-	MAILFILE=/etc/mail/mailer.conf
+    MAILFILE=/etc/mail/mailer.conf
 
     sed -i -e 's/^#*/#/' "$MAILFILE"
 
-	cat <<MAILER >> "$MAILFILE"
+    cat <<MAILER >> "$MAILFILE"
 
 # https://gist.github.com/igalic/c77ed494e102977c9fd06ce9b053cda0
 sendmail        /usr/bin/true
@@ -52,16 +52,9 @@ MAILER
 
 periodicsetup() {
 
-     # The file periodic.conf contains a description of how daily, weekly	and
-     # monthly system maintenance	jobs should run.  It resides in	the
-     # /etc/defaults directory and parts may be overridden by a file of the same
-     # name in /etc, which itself	may be overridden by the
-     # /etc/periodic.conf.local file.
-     # https://man.freebsd.org/cgi/man.cgi?periodic.conf
+    PERIODICFILE=/etc/periodic.conf
 
-	PERIODICFILE=/etc/periodic.conf
-
-	cat <<PERIODIC > "$PERIODICFILE"
+    cat <<PERIODIC > "$PERIODICFILE"
 # https://gist.github.com/igalic/c77ed494e102977c9fd06ce9b053cda0
 
 # disable sendmail (mailqueue) cleanups:
@@ -143,7 +136,7 @@ UNIFISETUP
 }
 
 sethost() {
-	sysrc "hostname=$1"
+    sysrc "hostname=$1"
 }
 
 rcsetup
@@ -160,15 +153,15 @@ case "$1" in
         ;;
     'guac')
         guacsetup
-    	sethost guac
+        sethost guac
         ;;
     'unifi')
         unifisetup
-	    sethost unifi
+        sethost unifi
         ;;
     'wiki')
         wikisetup
-	    sethost wiki
+        sethost wiki
         ;;
 esac
 
