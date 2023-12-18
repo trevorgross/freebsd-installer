@@ -1,0 +1,63 @@
+PARTITIONS=DEFAULT
+DISTRIBUTIONS="kernel.txz base.txz dist.txz"
+
+#!/bin/sh
+
+export ASSUME_ALWAYS_YES=YES
+export PAGER=cat
+
+# modified from usr/libexec/bsdinstall/netconfig:
+IF=""
+# extremely naive, assumes one wired interface only
+# only purpose is to not hardcode a dev name in case 
+# e.g. a different device is selected on the qemu command line,
+# or qemu / FreeBSD change something that changes the name of
+# the interface you've always relied on. 
+for i in `ifconfig -l`; do
+	test "$i" = "lo0" && continue
+	IF="$i"
+done
+
+# get ip. Contrary to what I've read, just setting ifconfig_DEFAULT
+# isn't sufficient to actually get the connection up now.
+dhclient "$IF"
+sysrc "ifconfig_${IF}=DHCP"
+
+# General stuff, motd, boot loader.conf, rc.conf, timezone
+rm /etc/motd.template && touch /etc/motd.template
+echo 'autoboot_delay="3"' >> /boot/loader.conf
+sysrc sshd_enable="YES"
+sysrc ntpd_enable="YES"
+sysrc dumpdev="NO"
+cp /usr/share/zoneinfo/America/New_York /etc/localtime
+
+# Update system
+# Since 2015, src should be skipped by the updater if not installed, but
+# definitely don't want it so just delete.
+# https://svnweb.freebsd.org/base/head/usr.sbin/freebsd-update/freebsd-update.sh?view=markup&pathrev=284425
+sed -i '' -e s/Components\ src\ world\ kernel/Components\ world\ kernel/g /etc/freebsd-update.conf
+
+# Full system upgrade
+freebsd-update fetch
+freebsd-update install
+
+# Run setup script first because unifi changes pkgs from quarterly to latest
+sh /usr/local/etc/setup/setup.sh SELECTEDDIST
+
+# Upgrade and clean up any packages
+pkg update -f
+pkg upgrade -y
+pkg autoremove
+pkg clean -a
+
+# I guess we should set it to something
+echo "root" | pw usermod root -h 0
+
+# Clean up
+rm -rf /var/db/freebsd-update/*
+rm -rf /usr/local/etc/setup
+
+# Avoid potential boot loop
+# Should boot from hd next, but who knows
+poweroff
+
