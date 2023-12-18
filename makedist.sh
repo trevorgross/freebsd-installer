@@ -7,22 +7,22 @@ case "$1" in
         dist=base
         LABEL=14_0_BASE
         ;;
-	'guac')
-		dist=guac
-		LABEL=14_0_GUAC
-		;;
-	'unifi')
-		dist=unifi
-		LABEL=14_0_UNIFI
-		;;
-	'wiki')
-		dist=wiki
-		LABEL=14_0_WIKI
-		;;
-	*)
-		echo "Usage: $0 [base|guac|unifi|wiki]"
-		exit 1
-		;;
+    'guac')
+        dist=guac
+        LABEL=14_0_GUAC
+        ;;
+    'unifi')
+        dist=unifi
+        LABEL=14_0_UNIFI
+        ;;
+    'wiki')
+        dist=wiki
+        LABEL=14_0_WIKI
+        ;;
+    *)
+        echo "Usage: $0 [base|guac|unifi|wiki]"
+        exit 1
+        ;;
 esac
 
 MEDIA=FreeBSD-14.0-RELEASE-amd64-dvd1.iso
@@ -40,8 +40,8 @@ mkdir $BITSDIR
 bsdtar -C "$BITSDIR" -xf "$MEDIA"
 
 # to create dist: 
-# 	make file structure, e.g. mkdir -p usr/local/etc/
-#	put files in there, usr/local/etc/{myscript,otherscript}.sh
+#   make file structure, e.g. mkdir -p usr/local/etc/
+#   put files in there, usr/local/etc/{myscript,otherscript}.sh
 #   zip it and xz it, put in BSDINSTALL_DISTDIR of install media
 # this will zip it up and copy to BSDINSTALL_DISTDIR (usr/freebsd-dist)
 echo "-------CREATE/COPY DIST AND SELECT ITS INSTALL"
@@ -63,12 +63,12 @@ echo "-------CREATE EFI IMG"
 TMPDIR=$(mktemp -d /tmp/efiboot.XXXXXXX)
 BOOTIMG="${TMPDIR}/efiboot"
 mkfs.vfat \
-	-F 12 \
-	-s 1 \
-	-n EFISYS \
-	-C \
-	"$BOOTIMG" \
-	2048
+    -F 12 \
+    -s 1 \
+    -n EFISYS \
+    -C \
+    "$BOOTIMG" \
+    2048
 
 mkdir -p "${TMPDIR}/efi"
 sudo mount -o loop "$BOOTIMG" "${TMPDIR}/efi"
@@ -84,13 +84,13 @@ IMAGE="FreeBSD-${dist}.iso"
 
 # UEFI ONLY. BIOS booting of FreeBSD media is broken on SeaBIOS anyway.
 xorriso -as mkisofs \
-	-sysid "FreeBSD" -V "$LABEL" \
-   -r -J -l \
-   -eltorito-alt-boot \
-   -e boot/efiboot \
-     -no-emul-boot \
-   -o "$IMAGE" \
-   "$BITSDIR"
+    -sysid "FreeBSD" -V "$LABEL" \
+    -r -J -l \
+    -eltorito-alt-boot \
+    -e boot/efiboot \
+      -no-emul-boot \
+    -o "$IMAGE" \
+    "$BITSDIR"
 
 # Clean up
 echo "-------REMOVE WORKING DIR AND DIST FILE"
