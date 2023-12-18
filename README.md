@@ -19,8 +19,8 @@ Boot from the ISO that's created.
 All three options update the installation and all packages. 
 
 - "base" doesn't install any software packages except sudo, zsh, and readline.
-- "guac" installs and configures Apache Guacamole. On reboot, access it at http://<ip>:8080, default username/password both "guacadmin"
-- "unifi" installs and configures the Unifi controller software to control Unifi APs, cameras, etc. On reboot, access it at https://<ip>:8443.
-- "wiki" installs and configures a Mediawiki wiki with an sqlite database. Cite and MobileFrontend extensions are enabled, short URLs are enabled, and uploads are allowed. On reboot, access it at http://<ip>
+- "guac" installs and configures Apache Guacamole. On reboot, access it at http://{{ip}}:8080, default username/password both "guacadmin"
+- "unifi" installs and configures the Unifi controller software to control Unifi APs, cameras, etc. On reboot, access it at https://{{ip}}:8443.
+- "wiki" installs and configures a Mediawiki wiki with an sqlite database. Cite and MobileFrontend extensions are enabled, short URLs are enabled, and uploads are allowed. On reboot, access it at http://{{ip}}.
     - You should set the SERVER variable in the install script. Use an IP if DNS isn't set up to resolve the created machine.
 
