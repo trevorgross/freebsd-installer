@@ -54,9 +54,6 @@ sed -i '' -E '/^;listen.(owner|group|mode)/s/;//g' /usr/local/etc/php-fpm.d/www.
 # to include these extensions: apcu iconv intl xml
 sed -i '' 's/^PHP_EXT_INC=/PHP_EXT_INC=apcu iconv intl xml /' /usr/local/etc/php.conf 
 
-# start php-fpm
-service php-fpm start
-
 # Make this symlink, it's easier
 mkdir -p /tank/www
 ln -s /usr/local/www/mediawiki /tank/www/w
