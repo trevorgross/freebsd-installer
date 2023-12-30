@@ -94,6 +94,9 @@ sed -i '' '/<\/Host>/i \
 #     proxy_set_header Connection $http_connection;
 #     client_max_body_size 1g;
 #     access_log off;
+#     # Added to make RDP "Display Update" virtual channel 
+#     # resizing work when browser window is resized
+#     add_header 'Cache-Control' 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
 # }
 
 # Change root to /:
