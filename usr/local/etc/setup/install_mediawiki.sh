@@ -148,6 +148,7 @@ http {
 		listen 80;
 		listen [::]:80;
 		server_name CHANGEME;
+		client_max_body_size UPLOAD_MAX;
 
 		root /tank/www;
 		index index.php;
@@ -208,6 +209,7 @@ NGINXCONF
 
 # Update nginx.conf with server name
 sed -i '' "s/CHANGEME/$SERVER/g" /usr/local/etc/nginx/nginx.conf
+sed -i '' "s/UPLOAD_MAX/${UPLOAD_MAX}M/g" /usr/local/etc/nginx/nginx.conf
 
 cat <<WIKISETUP >> /root/wiki-setup
 Mediawiki setup completed on: $(date +%c).
