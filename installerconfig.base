@@ -41,11 +41,12 @@ sed -i '' -e s/Components\ src\ world\ kernel/Components\ world\ kernel/g /etc/f
 freebsd-update fetch
 freebsd-update install
 
-# Run setup script first because unifi changes pkgs from quarterly to latest
+pkg update -f
+
+# Run setup script
 sh /usr/local/etc/setup/setup.sh SELECTEDDIST
 
 # Upgrade and clean up any packages
-pkg update -f
 pkg upgrade -y
 pkg autoremove
 pkg clean -a

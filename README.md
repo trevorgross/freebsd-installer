@@ -2,7 +2,7 @@
 
 Create an ISO for an unattended FreeBSD installation. Optionally install Apache Guacamole, Mediawiki, or Unifi controller. 
 
-Each option creates its own ISO. ISOs are identical except for the argument to the setup script. This was a choice so setup could be completely unattended.
+Each option creates its own ISO. ISOs are identical except for the argument to the setup script. 
 
 The created ISO is _UEFI only_. I tried for a long time to figure out a hybrid MBR ISO, but when I saw the stock FreeBSD 14 disc doesn't boot with legacy SeaBIOS either I gave up.
 

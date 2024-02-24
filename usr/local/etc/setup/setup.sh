@@ -119,11 +119,7 @@ wikisetup() {
 }
 
 unifisetup() {
-    # use latest instead of quarterly
-    mkdir -p /usr/local/etc/pkg/repos
-    echo 'FreeBSD: { url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest" }' > /usr/local/etc/pkg/repos/FreeBSD.conf
-    pkg update -f
-    pkg install -y unifi7
+    pkg install -y unifi8
 
     # add service to startup
     echo '# Enabled for Unifi controller:' >> /etc/rc.conf
