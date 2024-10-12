@@ -1,23 +1,26 @@
 #!/bin/sh
 
+MAJOR=14
+MINOR=1
+
 dist=''
 # set type of install
 case "$1" in 
     'base')
         dist=base
-        LABEL=14_0_BASE
+        LABEL="${MAJOR}_${MINOR}_BASE"
         ;;
     'guac')
         dist=guac
-        LABEL=14_0_GUAC
+        LABEL="${MAJOR}_${MINOR}_GUAC"
         ;;
     'unifi')
         dist=unifi
-        LABEL=14_0_UNIFI
+        LABEL="${MAJOR}_${MINOR}_UNIFI"
         ;;
     'wiki')
         dist=wiki
-        LABEL=14_0_WIKI
+        LABEL="${MAJOR}_${MINOR}_WIKI"
         ;;
     *)
         echo "Usage: $0 [base|guac|unifi|wiki]"
@@ -25,7 +28,7 @@ case "$1" in
         ;;
 esac
 
-MEDIA=FreeBSD-14.0-RELEASE-amd64-dvd1.iso
+MEDIA="FreeBSD-${MAJOR}.${MINOR}-RELEASE-amd64-dvd1.iso"
 BITSDIR=release-media
 
 # the only sanity check here
@@ -80,7 +83,7 @@ rm -rf "$TMPDIR"
 
 # create ISO
 echo "-------CREATE ISO IMG"
-IMAGE="FreeBSD-${dist}.iso"
+IMAGE="FreeBSD-${MAJOR}.${MINOR}-${dist}.iso"
 
 # UEFI ONLY. BIOS booting of FreeBSD media is broken on SeaBIOS anyway.
 xorriso -as mkisofs \
