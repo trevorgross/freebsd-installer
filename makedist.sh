@@ -2,6 +2,7 @@
 
 MAJOR=14
 MINOR=1
+MEDIA="../FreeBSD-${MAJOR}.${MINOR}-RELEASE-amd64-dvd1.iso"
 
 dist=''
 # set type of install
@@ -28,7 +29,6 @@ case "$1" in
         ;;
 esac
 
-MEDIA="FreeBSD-${MAJOR}.${MINOR}-RELEASE-amd64-dvd1.iso"
 BITSDIR=release-media
 
 # the only sanity check here
