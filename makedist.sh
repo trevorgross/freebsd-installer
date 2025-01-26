@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MAJOR=14
-MINOR=1
+MINOR=2
 MEDIA="../FreeBSD-${MAJOR}.${MINOR}-RELEASE-amd64-dvd1.iso"
 
 dist=''
