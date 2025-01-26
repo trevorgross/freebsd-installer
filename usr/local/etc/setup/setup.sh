@@ -98,6 +98,15 @@ ZSHRC
     chmod 440 /usr/local/etc/sudoers.d/99-allow-poweroff
 }
 
+agentsetup() {
+    pkg install -y qemu-guest-agent
+    
+    # add service to startup
+    echo '# Enabled for qemu guest agent:' >> /etc/rc.conf
+    echo '# qemu_guest_agent_enable="YES"' >> /etc/rc.conf
+    sysrc qemu_guest_agent_enable="YES"
+}
+
 guacsetup() {
     if [ -f install_guacamole.sh ]; then
         chmod 755 install_guacamole.sh
@@ -119,7 +128,7 @@ wikisetup() {
 }
 
 unifisetup() {
-    pkg install -y unifi8
+    pkg install -y unifi9
 
     # add service to startup
     echo '# Enabled for Unifi controller:' >> /etc/rc.conf
@@ -142,6 +151,8 @@ mailersetup
 periodicsetup
 
 usersetup
+
+agentsetup
 
 case "$1" in
     'base')
