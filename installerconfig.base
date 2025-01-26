@@ -1,6 +1,6 @@
 DISTRIBUTIONS="kernel.txz base.txz dist.txz"
 export ZFSBOOT_VDEV_TYPE=stripe
-export ZFSBOOT_DISKS=nda0
+export ZFSBOOT_DISKS=vtbd0
 export nonInteractive="YES"
 
 #!/bin/sh
