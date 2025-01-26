@@ -104,6 +104,7 @@ agentsetup() {
     # add service to startup
     echo '# Enabled for qemu guest agent:' >> /etc/rc.conf
     echo '# qemu_guest_agent_enable="YES"' >> /etc/rc.conf
+    echo '' >> /etc/rc.conf
     sysrc qemu_guest_agent_enable="YES"
 }
 
