@@ -2,7 +2,7 @@
 
 MAJOR=14
 MINOR=2
-MEDIA="../FreeBSD-${MAJOR}.${MINOR}-RELEASE-amd64-dvd1.iso"
+MEDIA="../FreeBSD-${MAJOR}.${MINOR}-RELEASE-arm64-aarch64-dvd1.iso"
 
 dist=''
 # set type of install
@@ -83,7 +83,7 @@ rm -rf "$TMPDIR"
 
 # create ISO
 echo "-------CREATE ISO IMG"
-IMAGE="FreeBSD-${MAJOR}.${MINOR}-${dist}.iso"
+IMAGE="$(basename "$(echo "$MEDIA" | awk -F'/' '{print $NF}' )" .iso)-${dist}.iso"
 
 # UEFI ONLY. BIOS booting of FreeBSD media is broken on SeaBIOS anyway.
 xorriso -as mkisofs \
