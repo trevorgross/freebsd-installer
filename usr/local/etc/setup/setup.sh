@@ -129,7 +129,7 @@ wikisetup() {
 }
 
 unifisetup() {
-    pkg install -y unifi8
+    pkg install -y unifi9
 
     # add service to startup
     echo '# Enabled for Unifi controller:' >> /etc/rc.conf
