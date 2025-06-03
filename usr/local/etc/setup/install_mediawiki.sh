@@ -17,10 +17,10 @@ SERVER=10.10.0.62
 UPLOAD_MAX=500;
 
 # update, these change frequently
-# https://www.mediawiki.org/wiki/Special:ExtensionDistributor?extdistname=MobileFrontend&extdistversion=REL1_40
-# https://www.mediawiki.org/wiki/Special:ExtensionDistributor?extdistname=Cite&extdistversion=REL1_40
-MOBILEFE="MobileFrontend-REL1_40-62be0e3.tar.gz"
-CITES="Cite-REL1_40-723e08a.tar.gz"
+# https://www.mediawiki.org/wiki/Special:ExtensionDistributor?extdistname=MobileFrontend
+# https://www.mediawiki.org/wiki/Special:ExtensionDistributor?extdistname=Cite
+MOBILEFE="MobileFrontend-REL1_43-4688c87.tar.gz"
+CITES="Cite-REL1_43-c9830a4.tar.gz"
 
 # avoid errors about failing post-install scripts
 pkg install -y indexinfo
